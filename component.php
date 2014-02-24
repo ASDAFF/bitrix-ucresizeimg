@@ -186,6 +186,29 @@ if ($arParams["CACHE_ENABLE"] == "N"
           case "EXTEND": default:
         }
     } elseif ($arParams["RESIZE_TYPE"] == "LIMIT") {
+        if (!empty($arParams["WIDTH"])) {
+            $newWidth = $arParams["WIDTH"];
+            $newHeight = $arResult["SOURCE_IMAGE"]["HEIGHT"] * $newWidth / $arResult["SOURCE_IMAGE"]["WIDTH"];
+        }
+
+        if ( !empty($arParams["HEIGHT"]) && (empty($arParams["WIDTH"]) || $newHeight > $arParams["HEIGHT"]) ) {
+            $newHeight = $arParams["HEIGHT"];
+            $newWidth = $arResult["SOURCE_IMAGE"]["WIDTH"] * $newHeight / $arResult["SOURCE_IMAGE"]["HEIGHT"];
+        }
+
+        if (empty($arParams["WIDTH"]) && empty($arParams["HEIGHT"])) {
+            $newWidth = $arResult["SOURCE_IMAGE"]["WIDTH"];
+            $newHeight = $arResult["SOURCE_IMAGE"]["HEIGHT"];
+        }
+
+        if( $newWidth  > $arResult["SOURCE_IMAGE"]["WIDTH"]
+        ||  $newHeight > $arResult["SOURCE_IMAGE"]["HEIGHT"] ) {
+            $newWidth = $arResult["SOURCE_IMAGE"]["WIDTH"];
+            $newHeight = $arResult["SOURCE_IMAGE"]["HEIGHT"];
+        }
+
+        $outWidth = $newWidth;
+        $outHeight = $newHeight;
     } else {
         $arResult["ERROR"] = GetMessage("E_UNSUPPORTED_RESIZE_TYPE");
         return $abort($this);
@@ -212,7 +235,6 @@ if ($arParams["CACHE_ENABLE"] == "N"
     $R = null; $G = null; $B = null; $A = null; $color = null; $hasColor = true;
     $color = preg_replace("/\s+/", "", $arParams["FILL_COLOR"]);
     $color = strtolower($color);
-    echo $color;
 
     if (!empty($color)) {
         if (preg_match("/^\#([\d\w])([\d\w])([\d\w])$/", $color, $matches)) {
