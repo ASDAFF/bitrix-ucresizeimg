@@ -121,8 +121,8 @@ if ($arParams["CACHE_ENABLE"] == "N"
 
     if ($arParams["RESIZE_TYPE"] == "CROP") {
         if( empty($arParams["WIDTH"]) || empty($arParams["HEIGHT"])
-        || intval($arParams["WIDTH"])  != $arParams["WIDTH"]
-        || intval($arParams["HEIGHT"]) != $arParams["HEIGHT"] ){
+        || (string)intval($arParams["WIDTH"])  != (string)$arParams["WIDTH"]
+        || (string)intval($arParams["HEIGHT"]) != (string)$arParams["HEIGHT"] ){
             $arResult["ERROR"] = GetMessage("E_CROP_WH_INCORRECT");
             return $abort($this);
         }
@@ -208,6 +208,16 @@ if ($arParams["CACHE_ENABLE"] == "N"
           case "EXTEND": default:
         }
     } elseif ($arParams["RESIZE_TYPE"] == "LIMIT") {
+        if (!empty($arParams["WIDTH"]) && (string)intval($arParams["WIDTH"]) != (string)$arParams["WIDTH"]) {
+            $arResult["ERROR"] = GetMessage("E_LIMIT_WH_INCORRECT");
+            return $abort($this);
+        }
+
+        if (!empty($arParams["HEIGHT"]) && (string)intval($arParams["HEIGHT"]) != (string)$arParams["HEIGHT"]) {
+            $arResult["ERROR"] = GetMessage("E_LIMIT_WH_INCORRECT");
+            return $abort($this);
+        }
+
         if (!empty($arParams["WIDTH"])) {
             $newWidth = $arParams["WIDTH"];
             $newHeight = $arResult["SOURCE_IMAGE"]["HEIGHT"] * $newWidth / $arResult["SOURCE_IMAGE"]["WIDTH"];
