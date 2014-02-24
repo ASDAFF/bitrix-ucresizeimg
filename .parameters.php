@@ -184,7 +184,7 @@ $arComponentParameters = array(
             "PARENT" => "OUTPUT_FILE",
             "NAME" => GetMessage("UCRESIZEIMG_F_RESIZED_PATH"),
             "TYPE" => "TEXT",
-            "DEFAULT" => "/upload/ucresizedimg/",
+            "DEFAULT" => "/upload/ucresizeimg/",
         ),
         "FILE_PREFIX" => array(
             "PARENT" => "OUTPUT_FILE",
