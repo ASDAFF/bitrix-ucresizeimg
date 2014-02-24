@@ -224,7 +224,12 @@ if ($arParams["CACHE_ENABLE"] == "N"
         $arResult["SRC"] .= "/";
     }
     $prefix = str_replace("#INPUT_FILE_NAME#", $srcPathInfo["filename"], $arParams["FILE_PREFIX"]);
-    $arResult["SRC"] .= $prefix . $hash .".". $srcType;
+    if ($arParams["JPEG_OUTPUT"] == "CONV_PNG_DIFF_Q"
+    || $arParams["JPEG_OUTPUT"] == "CONV_PNG_SET_Q") {
+        $arResult["SRC"] .= $prefix . $hash .".jpeg";
+    } else {
+        $arResult["SRC"] .= $prefix . $hash .".". $srcType;
+    }
     $arResult["WIDTH"] = $outWidth;
     $arResult["HEIGHT"] = $outHeight;
     $arResult["OFFSET_X"] = $offsetX;
@@ -286,12 +291,18 @@ if ($arParams["CACHE_ENABLE"] == "N"
         ImageAlphaBlending($outImg, false);
         ImageSaveAlpha($outImg, true);
         if ($hasColor) {
-            $color = ImageColorAllocateAlpha($outImg, $R, $G, $B, $A);
+            if ($arParams["JPEG_OUTPUT"] == "CONV_PNG_DIFF_Q"
+            || $arParams["JPEG_OUTPUT"] == "CONV_PNG_SET_Q") {
+                $color = ImageColorAllocate($outImg, $R, $G, $B);
+            } else {
+                $color = ImageColorAllocateAlpha($outImg, $R, $G, $B, $A);
+            }
         }
         break;
     }
 
-    if( $hasColor && ($arParams["FILL_ALWAYS"] == "Y" || $arParams["KEEP_SIZE"] == "FILL") ) {
+    if( $hasColor && ($arParams["FILL_ALWAYS"] == "Y"
+    || ($arParams["RESIZE_TYPE"] == "CROP" && $arParams["KEEP_SIZE"] == "FILL") ) ) {
         ImageFill($outImg, 0, 0, $color);
     }
 
@@ -302,11 +313,20 @@ if ($arParams["CACHE_ENABLE"] == "N"
 
     switch (strtoupper($srcPathInfo["extension"])) {
       case "JPEG": case "JPG":
-        ImageJPEG($outImg, $rootPath ."/". $arResult["SRC"], 100); // TODO: quality
+        ImageJPEG($outImg, $rootPath ."/". $arResult["SRC"], $arParams["JPEG_QUALITY"]);
         break;
 
       case "PNG":
-        ImagePNG($outImg, $rootPath ."/". $arResult["SRC"], 9); // 9 is max compression
+        switch ($arParams["JPEG_OUTPUT"]) {
+          case "CONV_PNG_DIFF_Q":
+            ImageJPEG($outImg, $rootPath ."/". $arResult["SRC"], $arParams["PNG_QUALITY"]);
+            break;
+          case "CONV_PNG_SET_Q":
+            ImageJPEG($outImg, $rootPath ."/". $arResult["SRC"], $arParams["JPEG_QUALITY"]);
+            break;
+          default:
+            ImagePNG($outImg, $rootPath ."/". $arResult["SRC"], 9); // 9 is max compression
+        }
         break;
     }
 

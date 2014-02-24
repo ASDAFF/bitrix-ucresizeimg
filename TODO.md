@@ -6,4 +6,5 @@ TODO list
 3. GIF support;
 4. Handly ID for overwrite previous resized file;
 5. Additional cache parameters;
-6. Specific offset values.
+6. Specific offset values;
+7. More errors catching.

@@ -36,10 +36,8 @@ $MESS ["UCRESIZEIMG_F_FILL_COLOR"] = "Fill color for empty space";
 $MESS ["UCRESIZEIMG_F_FILL_ALWAYS"] = "Fill always";
 
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT"] = "Output JPEG file";
-$MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_KEEP_ORIG_Q"] = "Keep original input JPEG-file quality";
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_SET_Q"] = "Set specific quality for output JPEG-file";
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_CONV_PNG_DIFF_Q"] = "PNG to JPEG and set different qualities";
-$MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_CONV_PNG_KEEP_ORIG_AND_PNG_Q"] = "PNG to JPEG, for PNG specific quality, for JPEG keep original quality";
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_CONV_PNG_SET_Q"] = "PNG to JPEG and set quality for both";
 $MESS ["UCRESIZEIMG_F_JPEG_QUALITY"] = "JPEG quality";
 $MESS ["UCRESIZEIMG_F_PNG_QUALITY"] = "PNG quality";

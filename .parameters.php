@@ -19,13 +19,6 @@ if ($arCurrentValues["RESIZE_TYPE"] == "CROP") {
     $hiddenCropFields = "Y";
 }
 
-if ($arCurrentValues["JPEG_OUTPUT"] == "SET_Q"
-|| $arCurrentValues["JPEG_OUTPUT"] == "CONV_PNG_DIFF_Q"
-|| $arCurrentValues["JPEG_OUTPUT"] == "CONV_PNG_SET_Q") {
-    $hiddenJPEGQ = "N";
-} else {
-    $hiddenJPEGQ = "Y";
-}
 if ($arCurrentValues["JPEG_OUTPUT"] == "CONV_PNG_DIFF_Q"
 || $arCurrentValues["JPEG_OUTPUT"] == "CONV_PNG_KEEP_ORIG_AND_PNG_Q") {
     $hiddenPNGQ = "N";
@@ -162,13 +155,11 @@ $arComponentParameters = array(
             "NAME" => GetMessage("UCRESIZEIMG_F_JPEG_OUTPUT"),
             "TYPE" => "LIST",
             "VALUES" => array(
-                "KEEP_ORIG_Q" => GetMessage("UCRESIZEIMG_F_JPEG_OUTPUT_KEEP_ORIG_Q"),
                 "SET_Q" => GetMessage("UCRESIZEIMG_F_JPEG_OUTPUT_SET_Q"),
                 "CONV_PNG_DIFF_Q" => GetMessage("UCRESIZEIMG_F_JPEG_OUTPUT_CONV_PNG_DIFF_Q"),
-                "CONV_PNG_KEEP_ORIG_AND_PNG_Q" => GetMessage("UCRESIZEIMG_F_JPEG_OUTPUT_CONV_PNG_KEEP_ORIG_AND_PNG_Q"),
                 "CONV_PNG_SET_Q" => GetMessage("UCRESIZEIMG_F_JPEG_OUTPUT_CONV_PNG_SET_Q"),
             ),
-            "DEFAULT" => "KEEP_ORIG_Q",
+            "DEFAULT" => "SET_Q",
             "REFRESH" => "Y",
         ),
         "JPEG_QUALITY" => array(
@@ -176,7 +167,6 @@ $arComponentParameters = array(
             "NAME" => GetMessage("UCRESIZEIMG_F_JPEG_QUALITY"),
             "TYPE" => "TEXT",
             "DEFAULT" => 85,
-            "HIDDEN" => $hiddenJPEGQ,
         ),
         "PNG_QUALITY" => array(
             "PARENT" => "OUTPUT_FILE",

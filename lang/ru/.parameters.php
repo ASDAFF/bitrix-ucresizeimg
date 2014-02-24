@@ -36,10 +36,8 @@ $MESS ["UCRESIZEIMG_F_FILL_COLOR"] = "Цвет заливки пустого п�
 $MESS ["UCRESIZEIMG_F_FILL_ALWAYS"] = "Заливать всегда";
 
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT"] = "Выходящий JPEG файл";
-$MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_KEEP_ORIG_Q"] = "Сохранять качество входного JPEG-файла";
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_SET_Q"] = "Задать качество выходного JPEG-файла";
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_CONV_PNG_DIFF_Q"] = "PNG в JPEG и указать для каждого своё качество";
-$MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_CONV_PNG_KEEP_ORIG_AND_PNG_Q"] = "PNG в JPEG, для PNG своё, для JPEG сохранять оригинальное качество";
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_CONV_PNG_SET_Q"] = "PNG в JPEG, и задать общее качество выходного JPEG-файла";
 $MESS ["UCRESIZEIMG_F_JPEG_QUALITY"] = "Качество JPEG";
 $MESS ["UCRESIZEIMG_F_PNG_QUALITY"] = "Качество PNG";
