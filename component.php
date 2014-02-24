@@ -170,7 +170,7 @@ if ($arParams["CACHE_ENABLE"] == "N"
                 $offsetY = $getOffset($newHeight, $outHeight, $arParams["CROP_POS_Y"]);
             }
             break;
-          case "FILL": case "FILL_NON_TRANSPARENT":
+          case "FILL":
             if( $arParams["WIDTH"]  > $arResult["SOURCE_IMAGE"]["WIDTH"]
              || $arParams["HEIGHT"] > $arResult["SOURCE_IMAGE"]["HEIGHT"] ) {
                 $newWidth = $arResult["SOURCE_IMAGE"]["WIDTH"];
@@ -208,20 +208,69 @@ if ($arParams["CACHE_ENABLE"] == "N"
     $arResult["OFFSET_Y"] = $offsetY;
 
     $outImg = ImageCreateTrueColor($outWidth, $outHeight);
-    //ImageFill($outputImage, 0, 0, ImageColorAllocate($outputImage,
-    //    $resizeParams["FILL_COLOR"]["R"], $resizeParams["FILL_COLOR"]["G"], $resizeParams["FILL_COLOR"]["B"]));
+
+    $R = null; $G = null; $B = null; $A = null; $color = null; $hasColor = true;
+    $color = preg_replace("/\s+/", "", $arParams["FILL_COLOR"]);
+    $color = strtolower($color);
+    echo $color;
+
+    if (!empty($color)) {
+        if (preg_match("/^\#([\d\w])([\d\w])([\d\w])$/", $color, $matches)) {
+            $R = $matches[1]; $R = hexdec($R.$R); if ($R < 0) $R = 0; if ($R > 255) $R = 255;
+            $G = $matches[2]; $G = hexdec($G.$G); if ($G < 0) $G = 0; if ($G > 255) $G = 255;
+            $B = $matches[3]; $B = hexdec($B.$B); if ($B < 0) $B = 0; if ($B > 255) $B = 255;
+            $A = 0;
+        } elseif (preg_match("/^\#([\d\w]{2})([\d\w]{2})([\d\w]{2})$/", $color, $matches)) {
+            $R = hexdec($matches[1]); if ($R < 0) $R = 0; if ($R > 255) $R = 255;
+            $G = hexdec($matches[2]); if ($G < 0) $G = 0; if ($G > 255) $G = 255;
+            $B = hexdec($matches[3]); if ($B < 0) $B = 0; if ($B > 255) $B = 255;
+            $A = 0;
+        } elseif (preg_match("/^rgb\(([\d]{1,3}),([\d]{1,3}),([\d]{1,3})\)$/", $color, $matches)) {
+            $R = $matches[1]; if ($R < 0) $R = 0; if ($R > 255) $R = 255;
+            $G = $matches[2]; if ($G < 0) $G = 0; if ($G > 255) $G = 255;
+            $B = $matches[3]; if ($B < 0) $B = 0; if ($B > 255) $B = 255;
+            $A = 0;
+        } elseif (preg_match("/^rgba\(([\d]{1,3}),([\d]{1,3}),([\d]{1,3}),([\d]{1}(\.[\d]+)?)\)$/", $color, $matches)) {
+            $R = $matches[1]; if ($R < 0) $R = 0; if ($R > 255) $R = 255;
+            $G = $matches[2]; if ($G < 0) $G = 0; if ($G > 255) $G = 255;
+            $B = $matches[3]; if ($B < 0) $B = 0; if ($B > 255) $B = 255;
+
+            $A = (float)$matches[4];
+            $A = round($A * 127 / 1);
+            if ($A < 0) $A = 0; if ($A > 127) $A = 127;
+            $A = 127 - $A;
+        } else {
+            $arResult["ERROR"] = GetMessage("E_INCORRECT_FILL_COLOR_VALUE", array(
+                "#VALUE#" => $color,
+            ));
+            return $abort($this);
+        }
+    } else {
+        $hasColor = false;
+    }
+    $color = null;
 
     $inImg = null;
     switch (strtoupper($srcPathInfo["extension"])) {
-    case "JPEG": case "JPG":
+      case "JPEG": case "JPG":
         $inImg = ImageCreateFromJPEG($rootPath ."/". $arResult["SOURCE_IMAGE"]["SRC"]);
+        if ($hasColor) {
+            $color = ImageColorAllocate($outImg, $R, $G, $B);
+        }
         break;
 
-    case "PNG":
+      case "PNG":
         $inImg = ImageCreateFromPNG($rootPath ."/". $arResult["SOURCE_IMAGE"]["SRC"]);
         ImageAlphaBlending($outImg, false);
         ImageSaveAlpha($outImg, true);
+        if ($hasColor) {
+            $color = ImageColorAllocateAlpha($outImg, $R, $G, $B, $A);
+        }
         break;
+    }
+
+    if( $hasColor && ($arParams["FILL_ALWAYS"] == "Y" || $arParams["KEEP_SIZE"] == "FILL") ) {
+        ImageFill($outImg, 0, 0, $color);
     }
 
     ImageCopyResampled(
@@ -230,11 +279,11 @@ if ($arParams["CACHE_ENABLE"] == "N"
     );
 
     switch (strtoupper($srcPathInfo["extension"])) {
-    case "JPEG": case "JPG":
+      case "JPEG": case "JPG":
         ImageJPEG($outImg, $rootPath ."/". $arResult["SRC"], 100); // TODO: quality
         break;
 
-    case "PNG":
+      case "PNG":
         ImagePNG($outImg, $rootPath ."/". $arResult["SRC"], 9); // 9 is max compression
         break;
     }

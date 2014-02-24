@@ -23,16 +23,16 @@ $MESS ["CROP_POS_Y_TIP"] = "Works only when there are excess in height."
     ."<br/><br/>In ‘Top‛ mode excess will be cut off on the bottom side."
     ."<br/>In ‘Center‛ mode excess will be cut off on the top and bottom sides."
     ."<br/>In ‘Bottom‛ mode excess will be cut off on the top side.";
-$MESS ["KEEP_SIZE_TIP"] = "If source image size less than specified size.";
+$MESS ["KEEP_SIZE_TIP"] = "If source image size less than specified size."
+    ."<br/></br>If you need to keep transparent if it possible — use alpha channel of fill color.";
 $MESS ["FILL_COLOR_TIP"] = "Possible values:"
     ."<ul><li>#fff</li>"
     ."<li>#ffffff</li>"
     ."<li>#abc</li>"
     ."<li>#aabbcc</li>"
-    ."<li>#fffa (alpha-channel only for PNG)</li>"
-    ."<li>#ffffffaa (alpha-channel only for PNG)</li>"
     ."<li>rgb(255, 255, 255)</li>"
-    ."<li>rgba(255, 255, 255, 255) (alpha-channel only for PNG)</li></ul>";
+    ."<li>rgba(255, 255, 255, 1) (alpha-channel only for PNG)</li>"
+    ."<li>rgba(255, 255, 255, 0.5) (alpha-channel only for PNG)</li></ul>";
 
 $MESS ["PNG_QUALITY_TIP"] = "After conversion to JPEG";
 $MESS ["FILE_PREFIX_TIP"] = "Typically, the output files have names like this (without prefix):"

@@ -32,8 +32,8 @@ $MESS ["UCRESIZEIMG_F_KEEP_SIZE"] = "Keep specified size";
 $MESS ["UCRESIZEIMG_F_KEEP_SIZE_NO"] = "Don't keep";
 $MESS ["UCRESIZEIMG_F_KEEP_SIZE_EXTEND"] = "Extend image size";
 $MESS ["UCRESIZEIMG_F_KEEP_SIZE_FILL"] = "Fill empty space by specified color";
-$MESS ["UCRESIZEIMG_F_KEEP_SIZE_FILL_NON_TRANSPARENT"] = "Fill by color if can't keep empty space transparent";
 $MESS ["UCRESIZEIMG_F_FILL_COLOR"] = "Fill color for empty space";
+$MESS ["UCRESIZEIMG_F_FILL_ALWAYS"] = "Fill always";
 
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT"] = "Output JPEG file";
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_KEEP_ORIG_Q"] = "Keep original input JPEG-file quality";

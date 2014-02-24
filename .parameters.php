@@ -19,14 +19,6 @@ if ($arCurrentValues["RESIZE_TYPE"] == "CROP") {
     $hiddenCropFields = "Y";
 }
 
-if ($hiddenCropFields == "N"
-&& ($arCurrentValues["KEEP_SIZE"] == "FILL"
-|| $arCurrentValues["KEEP_SIZE"] == "FILL_NON_TRANSPARENT")) {
-    $hiddenFillColor = "N";
-} else {
-    $hiddenFillColor = "Y";
-}
-
 if ($arCurrentValues["JPEG_OUTPUT"] == "SET_Q"
 || $arCurrentValues["JPEG_OUTPUT"] == "CONV_PNG_DIFF_Q"
 || $arCurrentValues["JPEG_OUTPUT"] == "CONV_PNG_SET_Q") {
@@ -145,7 +137,6 @@ $arComponentParameters = array(
                 "NO" => GetMessage("UCRESIZEIMG_F_KEEP_SIZE_NO"),
                 "EXTEND" => GetMessage("UCRESIZEIMG_F_KEEP_SIZE_EXTEND"),
                 "FILL" => GetMessage("UCRESIZEIMG_F_KEEP_SIZE_FILL"),
-                "FILL_NON_TRANSPARENT" => GetMessage("UCRESIZEIMG_F_KEEP_SIZE_FILL_NON_TRANSPARENT"),
             ),
             "DEFAULT" => "NO",
             "HIDDEN" => $hiddenCropFields,
@@ -155,8 +146,13 @@ $arComponentParameters = array(
             "PARENT" => "RESIZE_PARAMS",
             "NAME" => GetMessage("UCRESIZEIMG_F_FILL_COLOR"),
             "TYPE" => "TEXT",
-            "DEFAULT" => "#fff",
-            "HIDDEN" => $hiddenFillColor,
+            "DEFAULT" => "rgba(255, 255, 255, 0)",
+        ),
+        "FILL_ALWAYS" => array(
+            "PARENT" => "RESIZE_PARAMS",
+            "NAME" => GetMessage("UCRESIZEIMG_F_FILL_ALWAYS"),
+            "TYPE" => "CHECKBOX",
+            "DEFAULT" => "N",
         ),
 
         /** output file */

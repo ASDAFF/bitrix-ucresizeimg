@@ -32,8 +32,8 @@ $MESS ["UCRESIZEIMG_F_KEEP_SIZE"] = "Придерживаться заданны
 $MESS ["UCRESIZEIMG_F_KEEP_SIZE_NO"] = "Не придерживаться";
 $MESS ["UCRESIZEIMG_F_KEEP_SIZE_EXTEND"] = "Растягивать изображение";
 $MESS ["UCRESIZEIMG_F_KEEP_SIZE_FILL"] = "Заполнить указанным цветом пустое пространство";
-$MESS ["UCRESIZEIMG_F_KEEP_SIZE_FILL_NON_TRANSPARENT"] = "Заполнить цветом, если нельзя оставить прозрачным";
 $MESS ["UCRESIZEIMG_F_FILL_COLOR"] = "Цвет заливки пустого пространства";
+$MESS ["UCRESIZEIMG_F_FILL_ALWAYS"] = "Заливать всегда";
 
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT"] = "Выходящий JPEG файл";
 $MESS ["UCRESIZEIMG_F_JPEG_OUTPUT_KEEP_ORIG_Q"] = "Сохранять качество входного JPEG-файла";
