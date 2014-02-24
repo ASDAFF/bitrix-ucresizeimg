@@ -3,7 +3,10 @@
 $MESS ["INPUT_FILE_PATH_TIP"] = "From site root";
 $MESS ["INPUT_IMAGE_ID_TIP"] = "Get image by ID via Bitrix-API CFile."
     ."<br/><br/>Keep it empty for using input file path.";
+$MESS ["DESCRIPTION_TIP"] = "Hash-tag #IMAGE_ID_DESCRIPTION# will be replaced to image description from Bitrix-API CFile (for image ID field).";
 
+$MESS ["WIDTH_TIP"] = "Keep it empty for unlimited width.";
+$MESS ["HEIGHT_TIP"] = "Keep it empty for unlimited height.";
 $MESS ["RESIZE_TYPE_TIP"] = "‘Limit size‛ mode reduces an image size, limiting it to the specified size."
         ." If source image size is 16:9 aspect ratio and ‘Width limit‛ and ‘Height limit‛ fields values is 200×200 pixels"
             ." then resized image size will be equals 200×112 pixels."

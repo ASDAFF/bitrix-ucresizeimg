@@ -81,6 +81,12 @@ $arComponentParameters = array(
             "NAME" => GetMessage("UCRESIZEIMG_F_INPUT_IMAGE_ID"),
             "TYPE" => "TEXT",
         ),
+        "DESCRIPTION" => array(
+            "PARENT" => "INPUT_FILE",
+            "NAME" => GetMessage("UCRESIZEIMG_F_DESCRIPTION"),
+            "TYPE" => "TEXT",
+            "DEFAULT" => "#IMAGE_ID_DESCRIPTION#",
+        ),
 
         /** resize configs */
 

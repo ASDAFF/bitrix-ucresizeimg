@@ -11,6 +11,7 @@ $MESS ["UCRESIZEIMG_G_CACHE"] = "Настройки кеширования";
 
 $MESS ["UCRESIZEIMG_F_INPUT_FILE_PATH"] = "Путь до входного файла";
 $MESS ["UCRESIZEIMG_F_INPUT_IMAGE_ID"] = "ID изображения";
+$MESS ["UCRESIZEIMG_F_DESCRIPTION"] = "Описание изображения";
 
 $MESS ["UCRESIZEIMG_F_WIDTH_LIMIT"] = "Ограничение по ширине";
 $MESS ["UCRESIZEIMG_F_HEIGHT_LIMIT"] = "Ограничение по высоте";

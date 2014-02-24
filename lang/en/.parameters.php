@@ -11,6 +11,7 @@ $MESS ["UCRESIZEIMG_G_CACHE"] = "Cache settings";
 
 $MESS ["UCRESIZEIMG_F_INPUT_FILE_PATH"] = "Input file path";
 $MESS ["UCRESIZEIMG_F_INPUT_IMAGE_ID"] = "Image ID";
+$MESS ["UCRESIZEIMG_F_DESCRIPTION"] = "Image description";
 
 $MESS ["UCRESIZEIMG_F_WIDTH_LIMIT"] = "Width limit";
 $MESS ["UCRESIZEIMG_F_HEIGHT_LIMIT"] = "Height limit";
