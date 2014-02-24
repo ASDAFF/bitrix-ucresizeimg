@@ -44,5 +44,6 @@ $MESS ["UCRESIZEIMG_F_PNG_QUALITY"] = "PNG quality";
 $MESS ["UCRESIZEIMG_F_RESIZED_PATH"] = "Resized output file directory";
 $MESS ["UCRESIZEIMG_F_FILE_PREFIX"] = "Output file name prefix";
 
+$MESS ["UCRESIZEIMG_F_UNIQUE_SALT"] = "Unique ‘salt‛";
 $MESS ["UCRESIZEIMG_F_CACHE_ENABLE"] = "Cache enabled";
 $MESS ["UCRESIZEIMG_F_CACHE_TIME"] = "Cache cleanup interval";

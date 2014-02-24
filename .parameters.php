@@ -32,6 +32,11 @@ if ($arCurrentValues["CACHE_ENABLE"] == "Y") {
     $hiddenCacheParams = "Y";
 }
 
+$uniqueSalt = "";
+for ($i=0; $i<32; $i++) {
+    $uniqueSalt .= mt_rand(0, 9);
+}
+
 $arComponentParameters = array(
     "GROUPS" => array(
         "INPUT_FILE" => array(
@@ -190,6 +195,12 @@ $arComponentParameters = array(
 
         /** cache */
 
+        "UNIQUE_SALT" => array(
+            "PARENT" => "CACHE",
+            "NAME" => GetMessage("UCRESIZEIMG_F_UNIQUE_SALT"),
+            "TYPE" => "TEXT",
+            "DEFAULT" => $uniqueSalt,
+        ),
         "CACHE_ENABLE" => array(
             "PARENT" => "CACHE",
             "NAME" => GetMessage("UCRESIZEIMG_F_CACHE_ENABLE"),

@@ -22,13 +22,18 @@ if ($arParams["CACHE_ENABLE"] == "N"
     $arResult["ERROR"] = null;
     $supportedFormats = array("JPEG", "PNG");
 
-    $hash = md5("ucresizeimg" // salt
-        .$arParams["INPUT_FILE_PATH"].$arParams["INPUT_IMAGE_ID"]
-        .$arParams["WIDTH"].$arParams["HEIGHT"]
-        .$arParams["RESIZE_TYPE"].$arParams["CROP_POS_X"].$arParams["CROP_POS_Y"]
-        .$arParams["KEEP_SIZE"].$arParams["FILL_COLOR"].$arParams["JPEG_OUTPUT"]
-        .$arParams["JPEG_QUALITY"].$arParams["PNG_QUALITY"]
-    );
+    $hash = null;
+    if (!empty($arParams["UNIQUE_SALT"])) {
+        $hash = md5("ucresizeimg" . $arParams["UNIQUE_SALT"]);
+    } else {
+        $hash = md5("ucresizeimg" // salt
+            .$arParams["INPUT_FILE_PATH"].$arParams["INPUT_IMAGE_ID"]
+            .$arParams["WIDTH"].$arParams["HEIGHT"]
+            .$arParams["RESIZE_TYPE"].$arParams["CROP_POS_X"].$arParams["CROP_POS_Y"]
+            .$arParams["KEEP_SIZE"].$arParams["FILL_COLOR"].$arParams["JPEG_OUTPUT"]
+            .$arParams["JPEG_QUALITY"].$arParams["PNG_QUALITY"]
+        );
+    }
 
     $arResult["SOURCE_IMAGE"] = array();
 
@@ -84,9 +89,26 @@ if ($arParams["CACHE_ENABLE"] == "N"
         if (!empty($path[$i]) && $path[$i] != '.') {
             $curDir .= "/" . $path[$i];
             if (!is_dir($curDir) && !@mkdir($curDir, 0755)) {
-                $arResult["ERROR"] = GetMessage("E_CANNOT_CREATE_FOLDER", array("#PATH#" => $curDir));
+                $arResult["ERROR"] = GetMessage("E_CANNOT_CREATE_DIR", array("#PATH#" => $curDir));
                 return $abort($this);
             }
+        }
+    }
+
+    /** cleanup previous resized files */
+    if (!empty($arParams["UNIQUE_SALT"])) {
+        $handle = null;
+        $curDir = $rootPath ."/". $arParams["RESIZED_PATH"];
+        if ($handle = opendir($curDir)) {
+            while (false !== ($entry = readdir($handle))) {
+                if (!is_file($curDir ."/". $entry)) continue;
+                if (preg_match("/^.*".$hash."\.(jpeg|jpg|png)$/", $entry, $matches)) {
+                    @unlink($curDir ."/". $entry);
+                }
+            }
+        } else {
+            $arResult["ERROR"] = GetMessage("E_CANNOT_OPEN_DIR", array("#PATH#" => $curDir));
+            return $abort($this);
         }
     }
 

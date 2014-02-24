@@ -44,5 +44,6 @@ $MESS ["UCRESIZEIMG_F_PNG_QUALITY"] = "Качество PNG";
 $MESS ["UCRESIZEIMG_F_RESIZED_PATH"] = "Директория для выходящего файла";
 $MESS ["UCRESIZEIMG_F_FILE_PREFIX"] = "Префикс имени выходящего файла";
 
+$MESS ["UCRESIZEIMG_F_UNIQUE_SALT"] = "Уникальная «соль»";
 $MESS ["UCRESIZEIMG_F_CACHE_ENABLE"] = "Кеш включен";
 $MESS ["UCRESIZEIMG_F_CACHE_TIME"] = "Интервал очистки кеша";

@@ -8,5 +8,6 @@ $MESS ["E_UNSUPPORTED_TYPE"] = "Неподдерживаемый тип изоб
 $MESS ["E_UNSUPPORTED_RESIZE_TYPE"] = "Неподдерживаемый тип ресайза";
 $MESS ["E_CROP_WH_INCORRECT"] = "Некорректно указаны ширина или высота (для режима ресайза «кадрирование» оба поля обязательны к заполнению)";
 $MESS ["E_EMPTY_RESIZED_PATH"] = "Не указана директория сохранения выходных изображений";
-$MESS ["E_CANNOT_CREATE_FOLDER"] = "Не удалось создать директорию: #PATH#";
+$MESS ["E_CANNOT_CREATE_DIR"] = "Не удалось создать директорию: #PATH#";
+$MESS ["E_CANNOT_OPEN_DIR"] = "Не удалось открыть директорию: #PATH#";
 $MESS ["E_INCORRECT_FILL_COLOR_VALUE"] = "Некорректное значение цвета заливки: #VALUE#";

@@ -45,4 +45,6 @@ $MESS ["FILE_PREFIX_TIP"] = "Typically, the output files have names like this (w
     ."If prefix is «#INPUT_FILE_NAME#_» then output file will be have name: "
     ."«Red_Panda_d41d8cd98f00b204e9800998ecf8427e.png».";
 
+$MESS ["UNIQUE_SALT_TIP"] = "It is strongly recommended to always use this field "
+    ."to avoid the accumulation of unused images and potential memory overflow.";
 $MESS ["CACHE_ENABLE_TIP"] = "It makes sense to disable caching for testing or if (auto-)caching enabled for parent component.";
